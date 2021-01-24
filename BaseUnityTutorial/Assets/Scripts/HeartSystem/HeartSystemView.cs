@@ -5,7 +5,7 @@ public class HeartSystemView : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Hearts;
     #region Ссылка на класс с нужным соыбтием.
-    private HeartSystem heartSystem;
+    [SerializeField] private HeartSystem heartSystem;
     #endregion
 
     #region Подписка и отписка
