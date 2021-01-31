@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Singleton;
+using System;
 using UnityEngine;
 
 public class TestSingleton : MonoBehaviour

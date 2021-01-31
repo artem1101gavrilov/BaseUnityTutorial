@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Singleton;
+using UnityEngine;
 using Zenject;
 
 public class Enemy : MonoBehaviour

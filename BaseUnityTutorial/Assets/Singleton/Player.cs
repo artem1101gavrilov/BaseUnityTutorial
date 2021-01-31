@@ -1,31 +1,34 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Singleton
 {
-    public static Player instance { get; private set; }
-    public string Name { get; set; }
-
-    private void Awake()
+    public class Player : MonoBehaviour
     {
-        if(instance == null)
+        public static Player instance { get; private set; }
+        public string Name { get; set; }
+
+        private void Awake()
         {
-            instance = this;
-            Name = "Lana";
-            //DontDestroyOnLoad(gameObject);
+            if (instance == null)
+            {
+                instance = this;
+                Name = "Lana";
+                //DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        private Player()
         {
-            Destroy(gameObject);
+
         }
-    }
 
-    private Player()
-    {
-
-    }
-
-    public void Say()
-    {
-        Debug.Log(Name);
+        public void Say()
+        {
+            Debug.Log(Name);
+        }
     }
 }
