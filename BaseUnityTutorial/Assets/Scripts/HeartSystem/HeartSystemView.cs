@@ -4,7 +4,7 @@ using UnityEngine;
 public class HeartSystemView : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Hearts;
-    #region Ссылка на класс с нужным соыбтием.
+    #region Ссылка на класс с нужным событием.
     [SerializeField] private HeartSystem heartSystem;
     #endregion
 

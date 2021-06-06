@@ -1,23 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CubeCreator : MonoBehaviour
 {
+    /// <summary>
+    /// Префаб куба, который будем создавать.
+    /// </summary>
     [SerializeField] private GameObject Cube;
-    private Transform currentCube;
+    /// <summary>
+    /// Позиция для создания нового куба.
+    /// </summary>
+    [SerializeField] private Vector3 position;
+    /// <summary>
+    /// Размер последнего установленного куба.
+    /// Изначально 5.
+    /// </summary>
+    private float size = 5;
+    private bool canCreated = true;
+    private int HP = 3;
+    private int score = 0;
+
+    public event System.Action<int> OnChangeHealth;
+    public event System.Action<int> OnChangeScore;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        CreateCube();
+    }
+
+    private void CreateCube()
+    {
+        if (canCreated && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            var position = Input.mousePosition;
-            position.z = 10;
-            currentCube = Instantiate(Cube, Camera.main.ScreenToWorldPoint(position) + transform.forward * 10, Quaternion.identity).transform;
+            var cube = Instantiate(Cube, position, Quaternion.identity).GetComponent<GameCube>();
+            cube.Init(size, CompleteCreatedCube, DestroyingCreatedCube);
+            canCreated = false;
         }
-        else if (Input.GetKey(KeyCode.Mouse0))
-        {
-            currentCube.localScale += Vector3.one * Time.deltaTime;
-        }
+    }
+
+    private void CompleteCreatedCube(float size)
+    {
+        this.size = size;
+        score++;
+        OnChangeScore(score);
+
+        position.y += size;
+
+        var positionCamera = transform.position;
+        positionCamera.y += size;
+        transform.position = positionCamera;
+
+        canCreated = true;
+    }
+
+    private void DestroyingCreatedCube()
+    {
+        HP--;
+        OnChangeHealth(HP);
+        if(HP > 0) canCreated = true;
     }
 }

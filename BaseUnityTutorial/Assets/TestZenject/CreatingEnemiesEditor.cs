@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(CreatingEnemies))]
-public class CreatingEnemiesEditor : Editor
+//[CustomEditor(typeof(CreatingEnemies))]
+public class CreatingEnemiesEditor 
 {
-    public override void OnInspectorGUI()
+    public void OnInspectorGUI()
     {
-        DrawDefaultInspector();
+        /*DrawDefaultInspector();
 
         var creatingEnemies = (CreatingEnemies)target;
         if(GUILayout.Button("Create Enemy"))
         {
             creatingEnemies.CreateEnemy();
-        }
+        }*/
     }
 }
